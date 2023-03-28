@@ -1,0 +1,27 @@
+Dear All,
+
+Please make note of the following points for projects:
+
+1. There will be a mid/intermediate evaluation on the weekend (Friday/Saturday/Sunday) of 31st March. Exact details will be shared in subsequent days.
+
+2. The tentative date for the final eval/presentation is 20th April. Exact date will be announced in subsequent days.
+
+3. For the mid eval, you are expected to present the following:
+
+	(A) A crystal-clear understanding of the relevant research paper you are working on.
+
+	(B) A broad overview of the problem you are working on - Why is the problem interesting, why is it challenging etc. (You might be able to find some of these details in the paper itself)
+
+	(C) Exact scope of what all you will be attempting as part of the project, and how you will be doing it. This would involve details like what dataset you will be using, how to access the dataset, what will be your baseline model, what expeiments/ablations/comparisons you'll be doing, what kind of computing resources you have etc. Please note that some of the papers might be quite challenging, and you might need to down-scope them. Some papers might be relatively easier, so you might want/need to do more experimentation on them. Similarly, some datasets might be too large to train in a limited time, so you might need to train your model on a sub-sample of the data.
+
+	(D) A plan/timeline for how you will be doing the above tasks. Preferably, a per team-member distributuion too.
+
+	(E) Some initial progress on the code level
+
+	(F) A succinct presentation with all the above details
+
+4. You will be receiving feedback on 3C (scope of the project) during the evals. So make sure that you are fully clear on things from your end so that an exact scope can be finalized there. Changing the scope later would be challenging/not possible, and might lead to other issues. Further, please also note that to come up with a clear scope, you would need to do some initial experiments to get an idea of what kind of problems you'll face (many times things which look easy after reading the paper, turn out to be difficult on the code level), so please start working for 3C in advance. You can divide tasks between team members - like one person can read the paper, another can work on accessing the dataset etc.
+
+5. A resource on how to read research papers: http://ccr.sigcomm.org/online/files/p83-keshavA.pdf ; Also note that, to fully understand a paper, you might need to do more than a single reading, and might also need to read (or at least skim) through another paper / some other background information. So make sure that you start reading the paper well in advance
+
+6. Be in touch with your TAs for doubts/challenges. If you hit a roadblock anywhere, inform us! If you come on the last day and saying that you couldn't finish the project due to XYZ roadblocks, it would be very difficult to verify your claims. Thus, be in touch with the TAs. Also, TAs might not be able to answer all queries immediately as reading and understanding a paper is challenging for everyone!, So please plan in a way that you give TAs enough time to respond to queries.
