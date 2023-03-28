@@ -51,6 +51,6 @@ python test.py --data_dir <data_dir> --model_path <model_path> --save_dir <save_
 
 ## Resources
 
-Notion Link - [here](https://www.notion.so/aakashj2412/CV-Project-6f6e5725e29849ec8c9d9f06511b371f)
-Original Source - [here](https://richzhang.github.io/colorization/)
-Mid-eval Canva Link - [here](https://www.canva.com/design/DAFeeSZawPU/0RQG7aqjbvUVor1EC_NpxQ/edit?utm_content=DAFeeSZawPU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+- Notion Link - [here](https://www.notion.so/aakashj2412/CV-Project-6f6e5725e29849ec8c9d9f06511b371f)
+- Original Source - [here](https://richzhang.github.io/colorization/)
+- Mid-eval Canva Link - [here](https://www.canva.com/design/DAFeeSZawPU/0RQG7aqjbvUVor1EC_NpxQ/edit?utm_content=DAFeeSZawPU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
