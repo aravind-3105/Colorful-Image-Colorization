@@ -1,9 +1,8 @@
 import argparse
 
-import keras
-import tensorflow as tf
 from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
-from keras.utils import multi_gpu_model
+import tensorflow as tf
+import keras
 
 from config import patience, epochs, num_train_samples, num_valid_samples, batch_size
 from data_generator import train_gen, valid_gen
@@ -44,7 +43,7 @@ if __name__ == '__main__':
             if pretrained_path is not None:
                 model.load_weights(pretrained_path)
 
-        new_model = multi_gpu_model(model, gpus=num_gpu)
+        new_model = model
         # rewrite the callback: saving through the original model and not the multi-gpu model.
         model_checkpoint = MyCbk(model)
     else:
@@ -52,7 +51,7 @@ if __name__ == '__main__':
         if pretrained_path is not None:
             new_model.load_weights(pretrained_path)
 
-    sgd = keras.optimizers.SGD(lr=0.001, momentum=0.9, nesterov=True, clipnorm=5.)
+    sgd = tf.keras.optimizers.SGD(lr=0.001, momentum=0.9, nesterov=True, clipnorm=5.)
     new_model.compile(optimizer=sgd, loss='categorical_crossentropy')
 
     print(new_model.summary())

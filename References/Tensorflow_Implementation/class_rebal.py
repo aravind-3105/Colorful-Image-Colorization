@@ -11,10 +11,10 @@ from scipy.signal import gaussian, convolve
 
 
 def load_data(size=64):
-    image_folder = '/mnt/code/ImageNet-Downloader/image/resized'
-    names = [f for f in os.listdir(image_folder) if f.lower().endswith('.jpg')]
+    image_folder = '../../Datasets/tiny_imagenet/tiny-imagenet-200/test/images'
+    names = [f for f in os.listdir(image_folder) if f.lower().endswith('.jpeg')]
     np.random.shuffle(names)
-    num_samples = 100000
+    num_samples = min(100000, len(names))
     X_ab = np.empty((num_samples, size, size, 2))
     for i in range(num_samples):
         name = names[i]
@@ -47,7 +47,7 @@ def compute_color_prior(X_ab, size=64, do_plot=False):
     X_ab = np.vstack((X_a, X_b)).T
 
     if do_plot:
-        plt.hist2d(X_ab[:, 0], X_ab[:, 1], bins=100, normed=True, norm=LogNorm())
+        plt.hist2d(X_ab[:, 0], X_ab[:, 1], bins=100, density=True, norm=LogNorm())
         plt.xlim([-110, 110])
         plt.ylim([-110, 110])
         plt.colorbar()
@@ -110,6 +110,7 @@ def smooth_color_prior(size=64, sigma=5, do_plot=False):
         plt.show()
 
 
+
 def compute_prior_factor(size=64, gamma=0.5, alpha=1, do_plot=False):
     file_name = os.path.join(data_dir, "prior_prob_smoothed.npy")
     prior_prob_smoothed = np.load(file_name)
@@ -137,6 +138,6 @@ if __name__ == '__main__':
     do_plot = True
 
     X_ab = load_data()
-    compute_color_prior(X_ab, do_plot=True)
-    smooth_color_prior(do_plot=True)
+    # compute_color_prior(X_ab, do_plot=True)
+    # smooth_color_prior(do_plot=True)
     compute_prior_factor(do_plot=True)

@@ -1,10 +1,9 @@
 import keras.backend as K
 import tensorflow as tf
-from keras.layers import Input, Conv2D, BatchNormalization, UpSampling2D
-from keras.models import Model
-from keras.regularizers import l2
-from keras.utils import multi_gpu_model
-from keras.utils import plot_model
+from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, UpSampling2D
+from tensorflow.keras.models import Model
+from tensorflow.keras.regularizers import l2
+from tensorflow.keras.utils import plot_model
 
 from config import img_rows, img_cols, num_classes, kernel
 
@@ -87,7 +86,7 @@ if __name__ == '__main__':
     print(encoder_decoder.summary())
     plot_model(encoder_decoder, to_file='encoder_decoder.svg', show_layer_names=True, show_shapes=True)
 
-    parallel_model = multi_gpu_model(encoder_decoder, gpus=None)
+    parallel_model = encoder_decoder
     print(parallel_model.summary())
     plot_model(parallel_model, to_file='parallel_model.svg', show_layer_names=True, show_shapes=True)
 
