@@ -136,3 +136,4 @@ dmypy.json
 
 # Checkpoints
 *.pth
+*.hdf5
