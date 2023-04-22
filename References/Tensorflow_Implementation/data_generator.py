@@ -23,7 +23,7 @@ def get_soft_encoding(image_ab, nn_finder, nb_q):
     sigma_neighbor = 5
     wts = np.exp(-dist_neighb ** 2 / (2 * sigma_neighbor ** 2))
     wts = wts / np.sum(wts, axis=1)[:, np.newaxis]
-    # format the tar get
+    # Colorful-Image-Colorizationormat the tar get
     y = np.zeros((ab.shape[0], nb_q))
     idx_pts = np.arange(ab.shape[0])[:, np.newaxis]
     y[idx_pts, idx_neigh] = wts
@@ -44,6 +44,11 @@ class DataGenSequence(Sequence):
         with open(names_file, 'r') as f:
             self.names = f.read().splitlines()
 
+        # if usage == 'train':
+        #     self.names = self.names[:128]
+        # elif usage == 'valid':
+        #     self.names = self.names[:16]
+
         np.random.shuffle(self.names)
 
         # Load the array of quantized ab value
@@ -58,7 +63,7 @@ class DataGenSequence(Sequence):
     def __getitem__(self, idx):
         i = idx * batch_size
 
-        out_img_rows, out_img_cols = img_rows , img_cols
+        out_img_rows, out_img_cols = img_rows // 4, img_cols // 4
 
         length = min(batch_size, (len(self.names) - i))
         batch_x = np.empty((length, img_rows, img_cols, 1), dtype=np.float32)
@@ -77,7 +82,7 @@ class DataGenSequence(Sequence):
             # print(bgr.shape)
             # print(gray.shape)
             # print(x.shape)
-            x = cv.resize(x, (out_img_rows, out_img_cols), cv.INTER_CUBIC)
+            x = cv.resize(x, (img_rows, img_cols), cv.INTER_CUBIC)
             # print(x.shape)
             # print("abhayram get water pls")
             out_lab = cv.resize(lab, (out_img_rows, out_img_cols), cv.INTER_CUBIC)

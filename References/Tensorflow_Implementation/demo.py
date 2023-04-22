@@ -14,13 +14,14 @@ from model import build_model
 if __name__ == '__main__':
     channel = 3
 
-    model_weights_path = 'models/model.01-10.1224.hdf5'
+    model_weights_path = 'models/mini_epoch2.hdf5'
     model = build_model()
     model.load_weights(model_weights_path)
 
     print(model.summary())
 
-    image_folder = '../../Datasets/tiny_imagenet/tiny-imagenet-200/train_images'
+
+    image_folder = '../../Datasets/mini_imagenet/imagenet-mini/train_images'
     names_file = 'valid_names.txt'
     with open(names_file, 'r') as f:
         names = f.read().splitlines()
