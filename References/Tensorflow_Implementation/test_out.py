@@ -118,7 +118,7 @@ if __name__ == '__main__':
         # print('np.min(out_bgr): ' + str(np.min(out_bgr)))
         out_bgr = out_bgr.astype(np.uint8)
 
-        # cv.imwrite(os.path.join(gt_dir, image_name), bgr)
+        cv.imwrite(os.path.join(gt_dir, image_name), bgr)
         cv.imwrite(os.path.join(pred_dir, image_name), out_bgr)
 
     K.clear_session()
