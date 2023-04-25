@@ -10,6 +10,7 @@ import sklearn.neighbors as nn
 from config import img_rows, img_cols
 from config import nb_neighbors, T, epsilon
 from model import build_model
+import tqdm
 
 if __name__ == '__main__':
     channel = 3
@@ -21,12 +22,12 @@ if __name__ == '__main__':
     print(model.summary())
 
 
-    image_folder = '../../Datasets/mini_imagenet/imagenet-mini/train_images'
-    names_file = 'valid_names.txt'
-    with open(names_file, 'r') as f:
-        names = f.read().splitlines()
-
-    samples = random.sample(names, 10)
+    image_folder = '../../Datasets/mini_imagenet/imagenet-mini/val'
+    # get the names of the images in the folder, storing them in a list with the class folder name
+    names = []
+    for folder in os.listdir(image_folder):
+        for file in os.listdir(os.path.join(image_folder, folder)):
+            names.append(folder + '/' + file)
 
     h, w = img_rows // 4, img_cols // 4
 
@@ -37,10 +38,18 @@ if __name__ == '__main__':
     # Fit a NN to q_ab
     nn_finder = nn.NearestNeighbors(n_neighbors=nb_neighbors, algorithm='ball_tree').fit(q_ab)
 
-    for i in range(len(samples)):
-        image_name = samples[i]
+    gt_dir = '../../Datasets/mini_imagenet/imagenet-mini/test_images_gt'
+    pred_dir = '../../Datasets/mini_imagenet/imagenet-mini/test_images_pred'
+
+    for i in tqdm.tqdm(range(len(names))):
+        image_name = names[i]
         filename = os.path.join(image_folder, image_name)
-        print('Start processing image: {}'.format(filename))
+        classname = image_name.split('/')[0]
+        if not os.path.exists(os.path.join(gt_dir, classname)):
+            os.makedirs(os.path.join(gt_dir, classname))
+        if not os.path.exists(os.path.join(pred_dir, classname)):
+            os.makedirs(os.path.join(pred_dir, classname))
+        
         # b: 0 <=b<=255, g: 0 <=g<=255, r: 0 <=r<=255.
         bgr = cv.imread(filename)
         gray = cv.imread(filename, 0)
@@ -109,11 +118,7 @@ if __name__ == '__main__':
         # print('np.min(out_bgr): ' + str(np.min(out_bgr)))
         out_bgr = out_bgr.astype(np.uint8)
 
-        if not os.path.exists('images'):
-            os.makedirs('images')
-
-        cv.imwrite('images/{}_image.png'.format(i), gray)
-        cv.imwrite('images/{}_gt.png'.format(i), bgr)
-        cv.imwrite('images/{}_out.png'.format(i), out_bgr)
+        cv.imwrite(os.path.join(gt_dir, image_name), bgr)
+        cv.imwrite(os.path.join(pred_dir, image_name), out_bgr)
 
     K.clear_session()
