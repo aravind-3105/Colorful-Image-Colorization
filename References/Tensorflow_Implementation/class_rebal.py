@@ -30,7 +30,7 @@ def load_data(size=64):
 def compute_color_prior(X_ab, size=64, do_plot=False):
     # Load the gamut points location
     q_ab = np.load(os.path.join(data_dir, "pts_in_hull.npy"))
-
+    print(q_ab.shape)
     if do_plot:
         plt.figure(figsize=(15, 15))
         gs = gridspec.GridSpec(1, 1)
@@ -138,6 +138,6 @@ if __name__ == '__main__':
     do_plot = True
 
     X_ab = load_data()
-    # compute_color_prior(X_ab, do_plot=True)
+    compute_color_prior(X_ab, do_plot=False)
     # smooth_color_prior(do_plot=True)
-    compute_prior_factor(do_plot=True)
+    # compute_prior_factor(do_plot=True)
