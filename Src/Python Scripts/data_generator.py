@@ -7,10 +7,11 @@ import numpy as np
 import sklearn.neighbors as nn
 from tensorflow.keras.utils import Sequence
 import glob
-from config import batch_size, img_rows, img_cols, nb_neighbors
 
 image_folder = '../../Datasets/mini_imagenet/imagenet-mini/train_images'
-
+img_rows, img_cols = 256,256
+batch_size = 16
+nb_neighbors = 5
 
 def get_soft_encoding(image_ab, nn_finder, nb_q):
     h, w, _ = image_ab.shape
@@ -25,7 +26,7 @@ def get_soft_encoding(image_ab, nn_finder, nb_q):
 class DataGenSequence(Sequence):
     def __init__(self, usage):
         self.usage = usage
-        with open(f"../Helper_Data/{usage}_names.txt", "r") as f:
+        with open(f"../Helper_Data/{usage}_filenames.txt", "r") as f:
             self.names = f.read().splitlines()
         np.random.shuffle(self.names)
         q_ab, self.nb_q = np.load("../Helper_Data/colour_spaces.npy"), q_ab.shape[0]
@@ -75,7 +76,7 @@ def split_data():
 
     print('num_samples: ' + str(num_samples) + '\nnum_train_samples: ' + str(num_train_samples) + '\nnum_val_samples: ' + str(num_val_samples))
     
-    with open('../Helper_Data/val_names.txt', 'w') as f1, open('../Helper_Data/train_names.txt', 'w') as f2:
+    with open('../Helper_Data/val_filenames.txt', 'w') as f1, open('../Helper_Data/train_filenames.txt', 'w') as f2:
         f1.write('\n'.join(val_names)), f2.write('\n'.join(train_names))
 
 
