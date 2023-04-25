@@ -9,13 +9,13 @@ import sklearn.neighbors as nn
 
 from config import img_rows, img_cols
 from config import nb_neighbors, T, epsilon
-from model import build_model
+from model_test2 import build_model
 import tqdm
 
 if __name__ == '__main__':
     channel = 3
 
-    model_weights_path = 'models/model_aravanan_please_run.hdf5'
+    model_weights_path = 'models/ablation_test2.hdf5'
     model = build_model()
     model.load_weights(model_weights_path)
 
@@ -39,14 +39,14 @@ if __name__ == '__main__':
     nn_finder = nn.NearestNeighbors(n_neighbors=nb_neighbors, algorithm='ball_tree').fit(q_ab)
 
     gt_dir = '../../Datasets/mini_imagenet/imagenet-mini/test_images_gt'
-    pred_dir = '../../Datasets/mini_imagenet/imagenet-mini/test_images_pred'
+    pred_dir = '../../Datasets/mini_imagenet/imagenet-mini/ablation_study2_pred'
 
     for i in tqdm.tqdm(range(len(names))):
         image_name = names[i]
         filename = os.path.join(image_folder, image_name)
         classname = image_name.split('/')[0]
-        if not os.path.exists(os.path.join(gt_dir, classname)):
-            os.makedirs(os.path.join(gt_dir, classname))
+        # if not os.path.exists(os.path.join(gt_dir, classname)):
+        #     os.makedirs(os.path.join(gt_dir, classname))
         if not os.path.exists(os.path.join(pred_dir, classname)):
             os.makedirs(os.path.join(pred_dir, classname))
         
@@ -118,7 +118,7 @@ if __name__ == '__main__':
         # print('np.min(out_bgr): ' + str(np.min(out_bgr)))
         out_bgr = out_bgr.astype(np.uint8)
 
-        cv.imwrite(os.path.join(gt_dir, image_name), bgr)
+        # cv.imwrite(os.path.join(gt_dir, image_name), bgr)
         cv.imwrite(os.path.join(pred_dir, image_name), out_bgr)
 
     K.clear_session()
